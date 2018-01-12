@@ -143,6 +143,17 @@ describe('html-to-text', function() {
     });
   });
 
+  describe('simple block elements', function() {
+
+    it('should put a single new line when given divs', function() {
+      expect(htmlToText.fromString('<div>First</div><div>Second</div>')).to.equal('First\nSecond');
+    });
+
+    it('should put two new lines when given an "empty" line inbetween (gmail style)', function() {
+      expect(htmlToText.fromString('<div>First<div><br /></div>Second</div>')).to.equal('First\n\nSecond');
+    });
+  });
+
   describe('.fromFile()', function() {
     it('should convert file at given path', function(done) {
 
